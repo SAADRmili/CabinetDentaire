@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CabinetDentaire.Shared.Entities
+﻿namespace CabinetDentaire.Shared.Entities
 {
     public class Appointment
     {
@@ -22,7 +16,7 @@ namespace CabinetDentaire.Shared.Entities
         public Dentiste Dentiste { get; set; }
 
         //patient
-        public Guid  PatientId { get; set; }
+        public Guid PatientId { get; set; }
         public Patient Patient { get; set; }
 
         //type consultation

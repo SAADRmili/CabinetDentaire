@@ -19,7 +19,6 @@ namespace CabinetDentaire.API.Helpers
                 .ForMember(dest => dest.Dentiste, opt => opt.MapFrom(src => $"{src.Dentiste.Name}"))
                 .ForMember(dest => dest.Patient, opt => opt.MapFrom(src => $"{src.Patient.Name}"));
 
-
             //For patients
             CreateMap<PatientForCreation, Patient>();
             CreateMap<Patient,PatientDetails >();

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CabinetDentaire.Shared.Entities
+﻿namespace CabinetDentaire.Shared.Entities
 {
     public class Dentiste
     {
@@ -18,7 +12,7 @@ namespace CabinetDentaire.Shared.Entities
 
         public string Phone { get; set; }
 
-     
+
         //ForeignKey
         public Guid WorkCategoryId { get; set; }
 

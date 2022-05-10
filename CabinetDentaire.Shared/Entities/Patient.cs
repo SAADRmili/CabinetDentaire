@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CabinetDentaire.Shared.Entities
+﻿namespace CabinetDentaire.Shared.Entities
 {
     public class Patient
     {
@@ -19,9 +13,6 @@ namespace CabinetDentaire.Shared.Entities
         public string Phone { get; set; }
 
         public string Grender { get; set; }
-
-
-
 
         //list of appointments 
         public List<Consultation> Consultations { get; set; } = new List<Consultation>();

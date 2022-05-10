@@ -7,7 +7,6 @@ namespace CabinetDentaire.Services
     {
         Task<IEnumerable<Patient>> GetPatients();
         Task<IEnumerable<Patient>> GetPatient(Guid id);
-
         Task<int> AddPatient(Patient patient);
 
     }

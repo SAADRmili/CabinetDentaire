@@ -31,7 +31,6 @@ namespace CabinetDentaire.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-
             }
         }
 
@@ -50,7 +49,6 @@ namespace CabinetDentaire.API.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }

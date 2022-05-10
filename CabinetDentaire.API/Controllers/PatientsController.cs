@@ -3,7 +3,6 @@ using AutoMapper;
 using CabinetDentaire.API.Models.Patients;
 using CabinetDentaire.Services;
 using CabinetDentaire.Shared.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CabinetDentaire.API.Controllers
@@ -16,11 +15,9 @@ namespace CabinetDentaire.API.Controllers
         private readonly IMapper _mapper;
         public PatientsController(IPatientService patientService, IMapper mapper)
         {
-            _patientService = patientService ;   
-            _mapper = mapper ;
+            _patientService = patientService;
+            _mapper = mapper;
         }
-
-        
         [HttpGet]
         public async Task<IActionResult> GetAllPatients()
         {
@@ -32,7 +29,6 @@ namespace CabinetDentaire.API.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
@@ -42,27 +38,25 @@ namespace CabinetDentaire.API.Controllers
         {
             try
             {
-               
                 var data = await _patientService.GetPatient(id);
                 var patient = _mapper.Map<IEnumerable<PatientWithConsultation>>(data);
                 return Ok(patient.First());
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> AddPatient([FromForm] PatientForCreation patientForCreation)
+        public async Task<IActionResult> AddPatient([FromBody] PatientForCreation patientForCreation)
         {
             try
             {
                 var patient = _mapper.Map<Patient>(patientForCreation);
-                var excute =  await _patientService.AddPatient(patient);
-                if(excute<=0 )
+                var excute = await _patientService.AddPatient(patient);
+                if (excute <= 0)
                 {
                     return BadRequest("Something was wrong");
                 }
@@ -70,7 +64,6 @@ namespace CabinetDentaire.API.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }

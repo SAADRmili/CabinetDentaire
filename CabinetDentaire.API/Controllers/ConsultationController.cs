@@ -2,7 +2,6 @@
 using CabinetDentaire.API.Models.Consultations;
 using CabinetDentaire.Services.ConsultationServices;
 using CabinetDentaire.Shared.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CabinetDentaire.API.Controllers
@@ -19,10 +18,8 @@ namespace CabinetDentaire.API.Controllers
             _consultationService = consultationService;
             _mapper = mapper;
         }
-
-
         [HttpPost]
-        public async Task<IActionResult> AddConsultation([FromForm] ConsultationForCreation consultationForCreation)
+        public async Task<IActionResult> AddConsultation([FromBody] ConsultationForCreation consultationForCreation)
         {
             try
             {
@@ -36,7 +33,6 @@ namespace CabinetDentaire.API.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }

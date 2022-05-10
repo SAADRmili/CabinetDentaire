@@ -39,10 +39,7 @@ namespace CabinetDentaire.Services.CancellationServices
                 }
             }
 
-
-           
             return 0;
-
         }
 
         public Task<IEnumerable<Cancellation>> GetCancellations()
@@ -50,8 +47,6 @@ namespace CabinetDentaire.Services.CancellationServices
             var query = "select canc.*, a.*,d.*,p.*,cat.* from cancellations canc join  appointments a on canc.appointmentid = a.id  join  dentistes d ON d.id = a.dentisteid join patients p on p.id = a.patientid  join consultationcategories cat ON cat.id = a.consultationcategoryid";
 
             var cancellationDict = new Dictionary<Guid, Cancellation>();
-
-
             return _postgreSqlService.QueryMultiAsync<Cancellation, Appointment, Dentiste,Patient,ConsultationCategory,Cancellation >(query, (cancellation, appointment,dentiste,patient,cat) =>
             {
 
