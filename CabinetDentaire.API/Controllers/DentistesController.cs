@@ -33,13 +33,13 @@ namespace CabinetDentaire.API.Controllers
             }
         }
 
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchDentistes(Guid id, DentisteForUpdate dentisteForUpdate)
+        [HttpPatch("{dentiste}")]
+        public async Task<IActionResult> PatchDentistes(Dentiste dentiste, DentisteForUpdate dentisteForUpdate)
         {
             try
             {
                 var dentisteWorkTime = _mapper.Map<WorkCategory>(dentisteForUpdate);
-                var exucte = await _dentisteService.UpdateTimeWorkDentiste(id, dentisteWorkTime);
+                var exucte = await _dentisteService.UpdateTimeWorkDentiste(dentiste, dentisteWorkTime);
                 if (exucte <= 0)
                 {
                     return NotFound();

@@ -5,6 +5,8 @@ namespace CabinetDentaire.Services
     public interface IDentisteService
     {
         Task<IEnumerable<Dentiste>> GetDentistes();
-        Task<int> UpdateTimeWorkDentiste(Guid id, WorkCategory workCategory);
+
+        Task<Dentiste> GetDentiste(Guid id);
+        Task<int> UpdateTimeWorkDentiste(Dentiste dentiste, WorkCategory workCategory);
     }
 }

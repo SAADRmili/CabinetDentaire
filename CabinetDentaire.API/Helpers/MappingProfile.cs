@@ -13,7 +13,7 @@ namespace CabinetDentaire.API.Helpers
         public MappingProfile()
         {
             //For Appointment
-            CreateMap<AppointmentForCreation, Appointment>();
+            CreateMap<CreateAppointment, Appointment>();
             CreateMap<Appointment, AppointmentForDetailsConsultation>();
             CreateMap<Appointment, AppointmentDetails>()
                 .ForMember(dest => dest.Dentiste, opt => opt.MapFrom(src => $"{src.Dentiste.Name}"))
@@ -36,7 +36,7 @@ namespace CabinetDentaire.API.Helpers
 
 
             //for Cancellation 
-            CreateMap<CancellationForCreation , Cancellation>();
+            CreateMap<CancelAppointment , Cancellation>();
             CreateMap<Cancellation, CancellationDetails>();
 
         }

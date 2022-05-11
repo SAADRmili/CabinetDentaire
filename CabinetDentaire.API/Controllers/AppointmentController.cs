@@ -34,7 +34,7 @@ namespace CabinetDentaire.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAppointment([FromBody] AppointmentForCreation appointmentforCreation)
+        public async Task<IActionResult> AddAppointment([FromBody] CreateAppointment appointmentforCreation)
         {
             try
             {

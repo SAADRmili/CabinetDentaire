@@ -22,15 +22,19 @@ namespace CabinetDentaire.Services
                return dentiste;
            });
         }
-
-        public async Task<int> UpdateTimeWorkDentiste(Guid id, WorkCategory workCategory)
+        public async Task<Dentiste> GetDentiste(Guid id)
         {
             var query = "select * from dentistes where id = @id ";
 
             var parms = new DynamicParameters();
             parms.Add("id", id, System.Data.DbType.Guid);
 
-            var workCat = await _postgreSqlServices.QueryFirstOrDefaultAsync<Dentiste>(query, parms);
+            return await _postgreSqlServices.QueryFirstOrDefaultAsync<Dentiste>(query,parms);
+        }
+        public async Task<int> UpdateTimeWorkDentiste(Dentiste dentiste, WorkCategory workCategory)
+        {
+            var workCat = await GetDentiste(dentiste.Id);
+            var parms = new DynamicParameters();
 
             if (workCat != null)
             {
@@ -41,7 +45,6 @@ namespace CabinetDentaire.Services
                 parms.Add("hourendwork", workCategory.HourEndWork, System.Data.DbType.Time);
                 return await _postgreSqlServices.ExecuteAsync(queryUpdate, parms);
             }
-
             return 0;
         }
     }
