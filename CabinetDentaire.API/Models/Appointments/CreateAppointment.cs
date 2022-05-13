@@ -1,6 +1,6 @@
 ﻿namespace CabinetDentaire.API.Models.Appointments
 {
-    public class AppointmentForCreation
+    public class CreateAppointment
     {
 
         public Guid Id { get; set; }

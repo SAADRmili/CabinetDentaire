@@ -1,9 +1,4 @@
 ﻿using CabinetDentaire.Shared.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CabinetDentaire.Services
 {
@@ -11,6 +6,7 @@ namespace CabinetDentaire.Services
     {
         Task<IEnumerable<Dentiste>> GetDentistes();
 
-        Task<int> UpdateTimeWorkDentiste(Guid id,WorkCategory workCategory);
+        Task<Dentiste> GetDentiste(Guid id);
+        Task<int> UpdateTimeWorkDentiste(Guid id, WorkCategory workCategory);
     }
 }

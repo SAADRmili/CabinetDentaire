@@ -31,12 +31,11 @@ namespace CabinetDentaire.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCancelAppointment([FromForm] CancellationForCreation cancellationForCreation)
+        public async Task<IActionResult> AddCancelAppointment([FromBody] CancelAppointment cancellationForCreation)
         {
             try
             {
@@ -44,13 +43,12 @@ namespace CabinetDentaire.API.Controllers
                 var excute = await _cancellationService.AddCancellation(cancellation);
                 if(excute <=0 )
                 {
-                    return BadRequest();
+                    return BadRequest("THE APPOINTMENT A READY CANCELLED");
                 }
                 return Ok("Cancellation of This appointment has  added successfally !");
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }

@@ -19,35 +19,30 @@ namespace CabinetDentaire.API.Controllers
         }
 
         [HttpGet]
-        public  async Task<IActionResult> GetAllAppointment()
+        public async Task<IActionResult> GetAllAppointment()
         {
             try
             {
-                var data  =await _appointmentService.GetAppointments();
+                var data = await _appointmentService.GetAppointments();
                 var appointments = _mapper.Map<IEnumerable<AppointmentDetails>>(data);
                 return Ok(appointments);
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpPost]
-        public async Task<IActionResult> AddAppointment([FromForm]AppointmentForCreation appointmentforCreation)
+        public async Task<IActionResult> AddAppointment([FromBody] CreateAppointment appointmentforCreation)
         {
             try
             {
                 var appointment = _mapper.Map<Appointment>(appointmentforCreation);
-
-                var  app = await _appointmentService.AddAppointment(appointment);
+                var app = await _appointmentService.AddAppointment(appointment);
                 return Ok(app);
-
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }

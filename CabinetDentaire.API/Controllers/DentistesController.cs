@@ -2,7 +2,6 @@
 using CabinetDentaire.API.Models.Dentistes;
 using CabinetDentaire.Services;
 using CabinetDentaire.Shared.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CabinetDentaire.API.Controllers
@@ -15,9 +14,8 @@ namespace CabinetDentaire.API.Controllers
         private readonly IMapper _mapper;
         public DentistesController(IDentisteService dentisteService, IMapper mapper)
         {
-                _dentisteService = dentisteService;
-                  _mapper = mapper;
-
+            _dentisteService = dentisteService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -25,28 +23,24 @@ namespace CabinetDentaire.API.Controllers
         {
             try
             {
-
                 var data = await _dentisteService.GetDentistes();
-
                 var dentistes = _mapper.Map<IEnumerable<DentisteDetails>>(data);
-                return  Ok(dentistes);
+                return Ok(dentistes);
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchDentistes(Guid id,DentisteForUpdate dentisteForUpdate)
+        public async Task<IActionResult> PatchDentistes(Guid id, DentisteForUpdate dentisteForUpdate)
         {
             try
             {
                 var dentisteWorkTime = _mapper.Map<WorkCategory>(dentisteForUpdate);
-
                 var exucte = await _dentisteService.UpdateTimeWorkDentiste(id, dentisteWorkTime);
-                if(exucte<=0)
+                if (exucte <= 0)
                 {
                     return NotFound();
                 }
@@ -54,7 +48,6 @@ namespace CabinetDentaire.API.Controllers
             }
             catch (Exception ex)
             {
-
                 return BadRequest(ex.Message);
             }
         }

@@ -1,14 +1,9 @@
 ﻿using CabinetDentaire.Postgresql;
 using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Postgresql
 {
-    public  class PostgreSqlConnectionFactory : IBuildPostgreSqlConnection
+    public class PostgreSqlConnectionFactory : IBuildPostgreSqlConnection
     {
         private readonly NpgsqlConnectionStringBuilder _connectionString;
         public PostgreSqlConnectionFactory(PostgreSqlConfiguration postgreSqlConfiguration)
@@ -23,11 +18,10 @@ namespace Postgresql
                 Database = configuration.Database,
             };
         }
-
-        public  NpgsqlConnection GetConnection()
+        public NpgsqlConnection GetConnection()
         {
             return new NpgsqlConnection(_connectionString.ConnectionString);
-            
+
         }
     }
 }
