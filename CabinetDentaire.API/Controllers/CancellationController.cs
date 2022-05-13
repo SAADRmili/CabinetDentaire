@@ -43,7 +43,7 @@ namespace CabinetDentaire.API.Controllers
                 var excute = await _cancellationService.AddCancellation(cancellation);
                 if(excute <=0 )
                 {
-                    return BadRequest();
+                    return BadRequest("THE APPOINTMENT A READY CANCELLED");
                 }
                 return Ok("Cancellation of This appointment has  added successfally !");
             }

@@ -11,35 +11,20 @@ namespace CabinetDentaire.Services.CancellationServices
         {
             _postgreSqlService = postgreSqlService;
         }
+        /// <summary>
+        /// /I was creating a function in postgresql for check if appointment ready cancelled or not available
+        /// </summary>
+        /// <param name="cancellation"></param>
+        /// <returns></returns>
         public async Task<int> AddCancellation(Cancellation cancellation)
         {
+            var query = "select  f_cancellation_upsert(@id,@date,@descrip)";
+            var parms = new DynamicParameters();
+            parms.Add("id", cancellation.AppointmentId, System.Data.DbType.Guid);
+            parms.Add("date", cancellation.Date, System.Data.DbType.Date);
+            parms.Add("descrip", cancellation.Description, System.Data.DbType.String);
 
-            var checkQuery = "select count(1) from appointments where id=@id";
-            var parmsCheck = new DynamicParameters();
-            parmsCheck.Add("id", cancellation.AppointmentId, System.Data.DbType.Guid);
-            var exists =  await _postgreSqlService.ExecuteScalarAsync(checkQuery, parmsCheck);
-
-            if(exists)
-            {
-                var query = "insert into cancellations (date,description,appointmentid) values (@date ,@description ,@appid)";
-
-                var parms = new DynamicParameters();
-
-                parms.Add("date", cancellation.Date, System.Data.DbType.Date);
-                parms.Add("description", cancellation.Description, System.Data.DbType.String);
-                parms.Add("appid", cancellation.AppointmentId, System.Data.DbType.Guid);
-
-                var excute = await _postgreSqlService.ExecuteAsync(query, parms);
-                if (excute == 1)
-                {
-                    var queryUpdate = "Update appointments set iscancelled = True where id = @id";
-                    parms.Add("id", cancellation.AppointmentId, System.Data.DbType.Guid);
-                    return await _postgreSqlService.ExecuteAsync(queryUpdate, parms);
-
-                }
-            }
-
-            return 0;
+            return await _postgreSqlService.QueryFirstOrDefaultAsync<int>(query, parms);
         }
 
         public Task<IEnumerable<Cancellation>> GetCancellations()

@@ -31,9 +31,9 @@ namespace CabinetDentaire.Services
 
             return await _postgreSqlServices.QueryFirstOrDefaultAsync<Dentiste>(query,parms);
         }
-        public async Task<int> UpdateTimeWorkDentiste(Dentiste dentiste, WorkCategory workCategory)
+        public async Task<int> UpdateTimeWorkDentiste(Guid id, WorkCategory workCategory)
         {
-            var workCat = await GetDentiste(dentiste.Id);
+            var workCat = await GetDentiste(id);
             var parms = new DynamicParameters();
 
             if (workCat != null)
