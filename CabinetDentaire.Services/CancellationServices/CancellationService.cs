@@ -40,7 +40,6 @@ namespace CabinetDentaire.Services.CancellationServices
                     currentCancellation = cancellation;
                     cancellationDict.Add(currentCancellation.Id, cancellation);
                 }
-
                 currentCancellation.Appointment = appointment;
                 currentCancellation.Appointment.Patient = patient;
                 currentCancellation.Appointment.Dentiste = dentiste;

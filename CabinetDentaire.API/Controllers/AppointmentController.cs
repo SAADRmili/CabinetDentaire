@@ -32,14 +32,12 @@ namespace CabinetDentaire.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpPost]
         public async Task<IActionResult> AddAppointment([FromBody] CreateAppointment appointmentforCreation)
         {
             try
             {
                 var appointment = _mapper.Map<Appointment>(appointmentforCreation);
-
                 var app = await _appointmentService.AddAppointment(appointment);
                 return Ok(app);
             }
